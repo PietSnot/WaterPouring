@@ -25,7 +25,6 @@ public class WaterPouring3 {
     // constructor
     //*******************************************************************
     public WaterPouring3(int... volumes) {
-        
         if (volumes.length == 0) {
             throw new IllegalArgumentException("Please specify decent volumes!");
         }
