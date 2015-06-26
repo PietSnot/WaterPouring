@@ -28,9 +28,8 @@ public class WaterPouring3 {
         if (volumes.length == 0) {
             throw new IllegalArgumentException("Please specify decent volumes!");
         }
-        for (int i : volumes) {
-            this.volumes.add(i);
-        }
+        for (int i : volumes) this.volumes.add(i);
+
         for (int glassnr = 0; glassnr < volumes.length; glassnr++) {
             moves.add(new Empty(glassnr));
             moves.add(new Fill(glassnr));
@@ -133,8 +132,12 @@ public class WaterPouring3 {
             states.add(initialState);
             history.stream().reduce(
                 initialState, 
-                (a, b) -> { List<Integer> state = b.change(a); states.add(state); return state;}, 
-                (x, y) -> y
+                (state, move) -> { 
+                    List<Integer> newstate = move.change(state); 
+                    states.add(newstate); 
+                    return newstate;
+                }, 
+                (List<Integer> x, List<Integer> y) -> y   // is not used, so doesn't matter
             );
 //            IntStream.range(0, history.size())
 //                .forEach(i -> states.add(history.get(i).change(states.get(i))));
